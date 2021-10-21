@@ -58,7 +58,7 @@ def main_menu():
         case "quit":
             super_sure = input("Are you sure you would like to quit? yes or no?\n").lower()
             if super_sure == "yes":
-                quit("Sorry to see you go :(")
+                quit("Goodbye!")
             else:
                 main_menu()
         case _:
