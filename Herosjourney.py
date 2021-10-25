@@ -78,7 +78,7 @@ def main_menu():
             main_menu()
 
 def fight():
-
+    en_fight = enemies[chosen_en].
 
 #Welcome
 #Clear screen
