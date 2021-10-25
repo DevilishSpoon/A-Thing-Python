@@ -8,8 +8,12 @@ max_health = 10
 selected_weapon = ""
 gold = 100
 
+
 #Defining weapons and items
-items = {}
+items = {
+"health potion": {"heal": 10},
+"heart container": {"adds max health by 1"}
+}
 weapons = {
 "sword": {"damage": 10, "durability": 12},
 "katana": {"damage": 12, "durability": 10},
@@ -18,7 +22,12 @@ weapons = {
 }
 
 #Enemies
-enemies = ["Ogre","Goblin","Poop"]
+
+enemies = {
+"Ogre": {"damage": 10, "health": 10},
+"Goblin": {"damage": 1, "health": 2},
+"Poop": {"damage": 0, "health": 1}
+}
 
 #Functions
 def checkinv():
@@ -32,6 +41,7 @@ def checkinv():
     print("Items in your inventory!")
     for item in inventory:
         print(f"-{item}")
+    print(f"Gold: {gold}")
     print()
     print(f"/"*10)
 
@@ -47,6 +57,9 @@ def main_menu():
     print("--------------")
     choice_game = input(" Adventure?\n Check Inventory?\n Shop?\n Quit?\nWhat would you like to do?\n").lower()
     match choice_game:
+        case "adventure":
+            chosen_en = random.choice(enemies)
+            fight()
         case "check inventory":
             checkinv()
             input("press any button to continue...")
@@ -63,8 +76,9 @@ def main_menu():
                 main_menu()
         case _:
             main_menu()
+
 def fight():
-    print("hi")
+
 
 #Welcome
 #Clear screen
