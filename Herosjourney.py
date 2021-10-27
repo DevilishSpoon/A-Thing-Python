@@ -26,15 +26,19 @@ weapons = {
 "sword": {"damage": 2, "durability": 10},
 "katana": {"damage": 4, "durability": 5},
 "broken sword": {"damage": 100, "durability": 1},
-"halberd": {"damage": 15, "durability": 20}
+"halberd": {"damage": 3, "durability": 15}
 }
 
 #Enemies
 
 enemies = {
 "Ogre": {"damage": 3, "health": 5},
-"Goblin": {"damage": 1, "health": 2},
-"Poop": {"damage": 0, "health": 1}
+"Goblin": {"damage": 1, "health": 3},
+"Poop": {"damage": 0, "health": 1},
+"Honey bee": {"damage": 2, "health": 3}
+}
+npcs = {
+"Shopkeeper"
 }
 en_name = ""
 #Functions
@@ -118,7 +122,6 @@ def fight():
             match dam_dealt:
                 case dam_dealt if dam_dealt > p_damage:
                     print(f"Critical hit! Dealt {dam_dealt} damage!")
-                    p_wepdurab -= 1
                 case dam_dealt if dam_dealt == p_damage:
                     print(f"Hit! Dealt {dam_dealt} damage!")
                     p_wepdurab -= 1
@@ -128,7 +131,20 @@ def fight():
             en_health -= dam_dealt
             print(f"{en_name}, Health: {en_health} Damage: {en_damage}\n")
             time.sleep(1)
-
+        else:
+            dam_dealt = random.randrange(1-1, int(1*1.5)+1)
+            match dam_dealt:
+                case dam_dealt if dam_dealt > 1:
+                    print(f"Critical hit! Dealt {dam_dealt} damage!")
+                case dam_dealt if dam_dealt == 1:
+                    print(f"Hit! Dealt {dam_dealt} damage!")
+                    p_wepdurab -= 1
+                case dam_dealt if dam_dealt < 1:
+                    print(f"Weak hit! Dealt {dam_dealt} damage!")
+                    p_wepdurab -= 1
+            en_health -= dam_dealt
+            print(f"{en_name}, Health: {en_health} Damage: {en_damage}\n")
+            time.sleep(1)
         #Taking damage
         en_dam_dealt = random.randrange(en_damage-1, int(en_damage*1.5)+1)
         if en_health > 0:
