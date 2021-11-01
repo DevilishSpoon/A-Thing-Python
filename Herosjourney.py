@@ -76,7 +76,7 @@ def main_menu():
     match choice_game:
         case "colosseum":
             times_play = int(input("How many times would you like to fight? "))
-            fight()
+            fight(p_health,heals_used,gold,en_name,times_play,p_wepdurab)
             main_menu()
         case "check inventory":
             checkinv()
@@ -98,14 +98,8 @@ def main_menu():
         case _:
             main_menu()
 
-def fight():
+def fight(p_health,heals_used,gold,en_name,times_play,p_wepdurab,choice_game):
     #unpack values
-    global p_health
-    global heals_used
-    global gold
-    global en_name
-    global times_play
-    global p_wepdurab
     if not en_name:
         en_name = random.choice(list(enemies.keys()))
     en_damage,en_health = enemies[en_name].values()
@@ -174,7 +168,7 @@ def fight():
 
         #healing
         while p_health <= max_health-5 and "health potion" in inventory:
-            use_heal()
+            use_heal(p_health)
             heals_used += 1
         if heals_used > 0:
             print(f"Healed {heals_used*5} and used {heals_used} potions!\n")
@@ -190,15 +184,15 @@ def fight():
     en_name = ""
 
     #times play system
-    if times_play <= 1:
+    if times_play <= 1 and choice_game == "colosseum":
         input("press enter to continue...")
-    elif times_play > 1:
+    elif times_play > 1 and choice_game == "colosseum":
         times_play -=1
         fight()
+    return p_health,heals_used,gold,en_name,times_play,p_wepdurab,choice_game
 
 
-def use_heal():
-    global p_health
+def use_heal(p_health):
     if "health potion" in inventory:
         inventory.remove("health potion")
         p_health += 5
